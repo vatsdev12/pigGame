@@ -104,6 +104,7 @@ function init() {
     document.querySelector("#score-1").textContent = 0;
     document.querySelector("#name-0").textContent = "Player 1";
     document.querySelector("#name-1").textContent = "Player 2";
+    document.querySelector(".player-0-panel").classList.toggle('active')
     var diceDom = document.querySelector(".dice");
     diceDom.style.display = 'none';
     var rollDOM = document.querySelector(".btn-roll");
