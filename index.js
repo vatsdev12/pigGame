@@ -17,32 +17,29 @@ init()
 
 document.querySelector(".btn-roll").addEventListener('click', function () {
     if (gamePlaying) {
+        var dice1 = Math.floor(Math.random() * 6) + 1;
         var dice = Math.floor(Math.random() * 6) + 1;
         var diceDom = document.querySelector(".dice");
+        var diceDom1 = document.querySelector(".dice-1");
+        diceDom1.style.display = 'block';
         diceDom.style.display = 'block';
         diceDom.src = 'dice-' + dice + '.png';
-        console.log("ppppppp", previousScore);
-        if (previousScore === 6 && dice === 6) {
-            roundScore = 0;
-            document.querySelector("#current-" + activePlayer).textContent = 0;
-            document.querySelector("#score-" + activePlayer).textContent = 0;
-            activePlayer === 0 ? activePlayer = 1 : activePlayer = 0
-            document.querySelector(".player-0-panel").classList.toggle('active')
-            document.querySelector(".player-1-panel").classList.toggle('active')
-        }
-        previousScore = dice;
+        diceDom1.src = 'dice-' + dice1 + '.png';
 
-        if (dice === 1) {
+        console.log(dice1, "+++++++", dice);
+
+        if (dice === 1 || dice1 === 1) {
             roundScore = 0;
             document.querySelector("#current-" + activePlayer).textContent = 0;
             diceDom.style.display = 'none';
+            diceDom1.style.display = 'none';
             activePlayer === 0 ? activePlayer = 1 : activePlayer = 0
             document.querySelector(".player-0-panel").classList.toggle('active')
             document.querySelector(".player-1-panel").classList.toggle('active')
 
         }
         else {
-            roundScore += dice;
+            roundScore += dice + dice1;
             document.querySelector("#current-" + activePlayer).textContent = roundScore;
         }
     }
@@ -51,6 +48,8 @@ document.querySelector(".btn-roll").addEventListener('click', function () {
 
 document.querySelector(".btn-hold").addEventListener('click', function () {
     if (gamePlaying) {
+        var diceDom1 = document.querySelector(".dice-1");
+        diceDom1.style.display = 'none';
         var diceDom = document.querySelector(".dice");
         diceDom.style.display = 'none';
         score[activePlayer] += roundScore;
@@ -102,9 +101,11 @@ function init() {
     document.querySelector("#score-1").textContent = 0;
     document.querySelector("#name-0").textContent = "Player 1";
     document.querySelector("#name-1").textContent = "Player 2";
-
+    var diceDom1 = document.querySelector(".dice-1");
     var diceDom = document.querySelector(".dice");
     diceDom.style.display = 'none';
+    diceDom1.style.display = 'none';
+
     var rollDOM = document.querySelector(".btn-roll");
     gamePlaying = true;
 
